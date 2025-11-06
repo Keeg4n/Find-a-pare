@@ -2,8 +2,8 @@ import { useState, useEffect } from 'react';
 
 const FindThePairGame = () => {
   const tileColors = [
-    'bg-red-500', 'bg-blue-500', 'bg-green-500', 'bg-yellow-500',
-    'bg-purple-500', 'bg-pink-500', 'bg-indigo-500', 'bg-orange-500',
+    'bg-red-400', 'bg-blue-400', 'bg-green-400', 'bg-yellow-400',
+    'bg-purple-400', 'bg-pink-400', 'bg-indigo-400', 'bg-orange-400',
   ];
 
   const [tiles, setTiles] = useState([]);
@@ -85,33 +85,33 @@ const FindThePairGame = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 to-slate-700 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 flex items-center justify-center p-4">
       <div className="max-w-md w-full">
         {/* Заголовок и статистика */}
         <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-white mb-4">Найди пару</h1>
+          <h1 className="text-4xl font-bold text-gray-800 mb-4">Найди пару</h1>
           <div className="flex justify-center gap-12 mb-6">
             <div className="text-center">
-              <div className="text-2xl font-bold text-white">{moves}</div>
-              <div className="text-slate-300 text-sm">Ходов</div>
+              <div className="text-2xl font-bold text-gray-800">{moves}</div>
+              <div className="text-gray-600 text-sm">Ходов</div>
             </div>
             <div className="text-center">
-              <div className="text-2xl font-bold text-white">
+              <div className="text-2xl font-bold text-gray-800">
                 {matchedTiles.length / 2} / {tileColors.length}
               </div>
-              <div className="text-slate-300 text-sm">Найдено пар</div>
+              <div className="text-gray-600 text-sm">Найдено пар</div>
             </div>
           </div>
           <button
             onClick={initializeGame}
-            className="bg-blue-600 text-white px-8 py-3 rounded-xl font-semibold hover:bg-blue-700 active:scale-95 transition-all shadow-lg"
+            className="bg-blue-500 text-white px-8 py-3 rounded-xl font-semibold hover:bg-blue-600 active:scale-95 transition-all shadow-lg"
           >
             Новая игра
           </button>
         </div>
         
         {/* Игровое поле */}
-        <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20 shadow-2xl">
+        <div className="bg-white rounded-2xl p-6 border border-gray-200 shadow-lg">
           <div className="grid grid-cols-4 gap-4">
             {tiles.map((tile) => {
               const isFlipped = tile.isFlipped;
@@ -122,22 +122,22 @@ const FindThePairGame = () => {
                 <div
                   key={tile.id}
                   className={`
-                    aspect-square rounded-2xl
+                    aspect-square rounded-xl
                     transition-all duration-300
-                    ${isClickable ? 'cursor-pointer hover:scale-105' : 'cursor-default'}
+                    ${isClickable ? 'cursor-pointer hover:scale-105 hover:shadow-md' : 'cursor-default'}
                     ${isMatched ? 'scale-90 opacity-0' : 'scale-100 opacity-100'}
-                    shadow-lg border-2
+                    shadow-sm border-2
                     ${isFlipped 
-                      ? `${tile.color} border-white/50` 
-                      : 'bg-gradient-to-br from-slate-600 to-slate-800 border-slate-500/30 hover:from-slate-500 hover:to-slate-700'
+                      ? `${tile.color} border-white shadow-md` 
+                      : 'bg-gradient-to-br from-gray-200 to-gray-300 border-gray-300 hover:from-gray-300 hover:to-gray-400'
                     }
                     flex items-center justify-center
-                    text-white font-bold text-xl
+                    text-white font-bold
                   `}
                   onClick={() => isClickable && handleTileClick(tile)}
                 >
                   {!isFlipped && !isMatched && (
-                    <div className="w-8 h-8 bg-gradient-to-br from-blue-400 to-purple-500 rounded-full opacity-80" />
+                    <div className=" from-gray-400 to-gray-500 rounded-full" />
                   )}
                 </div>
               );
@@ -147,15 +147,15 @@ const FindThePairGame = () => {
 
         {/* Сообщение о победе */}
         {gameWon && (
-          <div className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 z-50">
-            <div className="bg-gradient-to-br from-green-600 to-emerald-600 text-white p-8 rounded-2xl text-center max-w-sm w-full border border-white/20 shadow-2xl">
+          <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4 z-50">
+            <div className="bg-white text-gray-800 p-8 rounded-2xl text-center max-w-sm w-full border border-gray-200 shadow-2xl">
               <div className="text-4xl mb-4">🎉</div>
-              <h2 className="text-3xl font-bold mb-2">Победа!</h2>
-              <p className="text-lg mb-2">Все пары найдены!</p>
-              <p className="text-lg mb-6">Ходов: <span className="font-bold">{moves}</span></p>
+              <h2 className="text-3xl font-bold mb-2 text-gray-900">Победа!</h2>
+              <p className="text-lg mb-2 text-gray-600">Все пары найдены!</p>
+              <p className="text-lg mb-6 text-gray-700">Ходов: <span className="font-bold text-gray-900">{moves}</span></p>
               <button
                 onClick={initializeGame}
-                className="bg-white text-green-700 px-8 py-3 rounded-xl font-bold text-lg hover:bg-slate-100 active:scale-95 transition-all shadow-lg"
+                className="bg-blue-500 text-white px-8 py-3 rounded-xl font-bold text-lg hover:bg-blue-600 active:scale-95 transition-all shadow-lg"
               >
                 Играть снова
               </button>
