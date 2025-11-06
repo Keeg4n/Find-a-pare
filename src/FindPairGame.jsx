@@ -45,7 +45,7 @@ const FindThePairGame = () => {
       return;
     }
 
-    // Сразу обновляем состояние
+    // Обновляем состояние
     const newTiles = tiles.map(tile =>
       tile.id === clickedTile.id ? { ...tile, isFlipped: true } : tile
     );
